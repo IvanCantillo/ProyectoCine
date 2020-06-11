@@ -1,0 +1,21 @@
+.container-top {
+    padding-top: 7em;
+}
+
+.bg-header {
+    background-color: rgb(65, 58, 153);
+}
+
+#img-banner {
+    border: 1px solid black;
+    height: 28em;
+    width: 100%;
+}
+
+.height-card-movie {
+    height: 15em;
+}
+
+.img-heigth {
+    height: 25em;
+}
