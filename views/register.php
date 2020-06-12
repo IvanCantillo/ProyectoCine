@@ -92,7 +92,7 @@
         </div>
     </div>
     <?php require_once('partials/_footer.php') ?>
-    <script src="../public/js/user/register.js"></script>
+    <script src="../public/js/user/register.js" type="module"></script>
 </body>
 
 </html>

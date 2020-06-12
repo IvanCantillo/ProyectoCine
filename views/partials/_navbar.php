@@ -17,12 +17,12 @@
               <?= $_SESSION['usuario']['nombre'] ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Perfil</a>
-              <a class="dropdown-item" href="#">Peliculas Compradas</a>
               <?php if ($_SESSION['usuario']['rol'] == 1) : ?>
-                <hr>
                 <a class="dropdown-item" href="#">Crear pelicula</a>
-                <a class="dropdown-item" href="#">Ver usuarios</a>
+                <a class="dropdown-item" href="<?= URL_BASE ?>user/lista">Ver usuarios</a>
+              <?php else: ?>
+                <!-- <a class="dropdown-item" href="#">Perfil</a> -->
+                <a class="dropdown-item" href="#">Peliculas Compradas</a>
               <?php endif; ?>
               <hr>
               <a class="dropdown-item" href="<?= URL_BASE . 'user/cerrar_session' ?>">Salir</a>

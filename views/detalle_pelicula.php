@@ -28,19 +28,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col text-left mt-4">
-                        <h4 class="font-weight-bold"> Sinopsis </h4>
-                        <p><?= $resMovie['descripcion'] ?></p>
-                    </div>
-                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-10 text-left mx-auto">
+                <h4 class="font-weight-bold"> Sinopsis </h4>
+                <p><?= $resMovie['descripcion'] ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-6 mx-auto mt-4">
                 <form action="<?= URL_BASE ?>comprar/index" method="post">
                     <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
-                    <button type="submit" class="btn btn-success btn-block" <?= $resMovie['fk_sala'] == ''? 'disabled' : NULL ?> > <?= $resMovie['fk_sala'] == ''? 'Proximamente...' : 'Seleccionar Sillas' ?> </button>
+                    <button type="submit" class="btn btn-success btn-block" <?= $resMovie['fk_sala'] == '' ? 'disabled' : NULL ?>> <?= $resMovie['fk_sala'] == '' ? 'Proximamente...' : 'Seleccionar Sillas' ?> </button>
                 </form>
             </div>
         </div>

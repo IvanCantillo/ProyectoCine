@@ -1,8 +1,10 @@
+import { URL_BASE } from '../parametros.js';
+
 async function get_tarjetas() {
   var formData = new FormData();
   formData.append("tarjetas", "si hay");
 
-  const response = await fetch("http://localhost/Proyecto_cine/user/tarjetas", {
+  const response = await fetch( URL_BASE + "user/tarjetas", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -13,7 +15,7 @@ async function get_tarjetas() {
 }
 
 async function register(data) {
-  const response = await fetch("http://localhost/Proyecto_cine/user/signup", {
+  const response = await fetch( URL_BASE + "user/signup", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -89,7 +91,7 @@ form_register.addEventListener("submit", async (e) => {
     let data = new FormData(form_register);
     const res = await register(data);
     if (res.message == "ok") {
-      window.location = "http://localhost/Proyecto_cine/inicio/";
+      window.location =  URL_BASE + "inicio/";
     }else {
         email_error.innerText = res.message;
         setTimeout(() => {

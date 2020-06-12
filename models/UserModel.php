@@ -101,6 +101,13 @@
             return hash("sha256", $password);
         }
 
+        public function getAll() {
+            $sqlGetAll = "SELECT usuarios.*, roles.rol FROM usuarios INNER JOIN roles ON usuarios.fk_rol = roles.id ORDER BY roles.rol";
+            $getAll = $this->conexion->prepare( $sqlGetAll );
+            $getAll->execute();
+            return $getAll;
+        }
+
         public function login() {
             $sqlEmail = "SELECT * FROM usuarios WHERE email = :email";
             $email = $this->conexion->prepare( $sqlEmail );

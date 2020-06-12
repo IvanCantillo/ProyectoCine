@@ -18,15 +18,17 @@
             session_start();
             if (isset( $_SESSION['usuario']['id'] )) {
                 header('Location: '. URL_BASE .'inicio/');
+            }else{
+                require_once ('views/login.php');
             }
-            require_once ('views/login.php');
         }
         public function register() {
             session_start();
             if (isset( $_SESSION['usuario']['id'] )) {
                 header('Location: '. URL_BASE .'inicio/');
+            }else{
+                require_once ('views/register.php');
             }
-            require_once ('views/register.php');
         }
 
         public function signin() {
@@ -117,6 +119,17 @@
                 header('Location:'. URL_BASE .'inicio/');
             }
         }
+
+        public function lista(){
+            session_start();
+            if (!isset( $_SESSION['usuario']['id'] )  || $_SESSION['usuario']['rol'] != 1) {
+                header('Location: '. URL_BASE .'inicio/');
+            }else{
+                $objUser = new UserModel();
+                $resUsers = $objUser->getAll();
+                require_once ('views/lista_usuarios.php');
+            }
+        } 
 
         public function cerrar_session() {
             session_start();

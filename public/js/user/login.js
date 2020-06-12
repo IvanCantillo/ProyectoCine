@@ -1,4 +1,4 @@
-var URL_BASE = "http://localhost/Proyecto_cine/";
+import { URL_BASE } from '../parametros.js';
 
 async function login( data ) {
     let response = await fetch(URL_BASE + 'user/signin', {
@@ -21,7 +21,7 @@ form_login.addEventListener('submit', async (e) => {
     const res = await login( data );
     console.log( res.message )
     if ( res.error === false) {
-        window.location = 'http://localhost/Proyecto_cine/inicio/'
+        window.location = URL_BASE + 'inicio/'
     }else {
         email_error.innerText = 'El correo es incorrecto';
         setTimeout(() => {
