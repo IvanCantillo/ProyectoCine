@@ -24,14 +24,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i=1; foreach( $resUsers as $user ): ?>
+                        <?php $i = 1;
+                        foreach ($resUsers as $user) : ?>
                             <tr>
                                 <td> <?= $i++; ?> </td>
-                                <td> <?= $user['nombre'] . " " . $user['apellido'] ?>  </td>
+                                <td> <?= $user['nombre'] . " " . $user['apellido'] ?> </td>
                                 <td> <?= $user['rol'] ?> </td>
                                 <td> <?= ($user['fk_estado'] == 1) ? 'Activo' : 'Inactivo' ?> </td>
-                                <td class="text-center"> <button class="btn btn-info"> <i class="fas fa-pen"></i> </button> </td>
-                                <td class="text-center"> <button class="btn btn-danger"> <i class="fas fa-trash"></i> </button> </td>
+                                <td class="text-center">
+                                    <form action="<?= URL_BASE ?>user/editar" method="POST">
+                                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                        <button type="submit" class="btn btn-info"> <i class="fas fa-pen"></i> </button>
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger" onclick="deleteUser( <?= $user['id'] ?>, '<?= URL_BASE ?>' )" data-toggle="modal" data-target="#modal<?= $user['id'] ?>"> <i class="fas fa-trash"></i> </button>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -40,10 +48,10 @@
         </div>
     </div>
     <div id="modal">
-        
+
     </div>
     <?php require_once('partials/_footer.php') ?>
-    <script src="../public/js/user/lista_usuarios.js">  </script>
+    <script src="../public/js/user/modals.js"></script>
 </body>
 
 </html>

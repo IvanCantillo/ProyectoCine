@@ -13,7 +13,6 @@
             ];
             return $data;
         }
-
         public function login() {
             session_start();
             if (isset( $_SESSION['usuario']['id'] )) {
@@ -30,7 +29,6 @@
                 require_once ('views/register.php');
             }
         }
-
         public function signin() {
             session_start();
             if( isset($_POST['email']) ){
@@ -60,7 +58,6 @@
                 header('Location:'. URL_BASE .'user/login');
             }
         }
-
         public function signup() {
             session_start();
             if( isset($_POST['email']) ){
@@ -105,7 +102,6 @@
                 header('Location:'. URL_BASE .'inicio/');
             }
         }
-
         public function tarjetas(){
             if( isset($_POST['tarjetas']) ){
                 $objUsers = new UserModel();
@@ -119,7 +115,6 @@
                 header('Location:'. URL_BASE .'inicio/');
             }
         }
-
         public function lista(){
             session_start();
             if (!isset( $_SESSION['usuario']['id'] )  || $_SESSION['usuario']['rol'] != 1) {
@@ -130,13 +125,52 @@
                 require_once ('views/lista_usuarios.php');
             }
         } 
+        public function editar() {
+            session_start();
+            if ( isset( $_POST['id'] ) && $_SESSION['usuario']['rol'] == 1 ) {
+                $objUser = new UserModel();
+                $objUser->setId( $_POST['id'] );
+                $resUser = $objUser->getUserById();
+                require_once ('views/editar_usuario.php');
+            }else {
+                header('Location: '. URL_BASE .'inicio/');
+            }
+        }
+        public function update() {
+            session_start();
+            if( isset( $_POST['email'] ) ){
+                $objUser = new UserModel();
+                $objUser->setId( $_POST['id'] );
+                $objUser->setNombre( $_POST['nombre'] );
+                $objUser->setApellido( $_POST['apellido'] );
+                $objUser->setEmail( $_POST['email'] );
+                $objUser->setTelefono( $_POST['telefono'] );
+                $objUser->setFk_rol( $_POST['rol'] );
+                $objUser->setFk_estado( $_POST['estado'] );
+                $objUser->update();
+                
+                echo json_encode( $this->response( false, 'ok' ) );
 
+            }else {
+                header('Location: '. URL_BASE .'inicio/');
+            }
+        }
+        public function eliminar() {
+            session_start();  
+            if (isset( $_POST['id'] )) {
+                $objUser = new UserModel();
+                $objUser->setId( $_POST['id'] );
+                $objUser->delete();
+                header('Location: '. URL_BASE .'user/lista');
+            }else {
+                header('Location: '. URL_BASE .'inicio/');
+            }      
+        }
         public function cerrar_session() {
             session_start();
             session_destroy();
             header('Location:'. URL_BASE .'inicio/');
         }
-
         public function test() {
             $user = $_POST['email'];
             $this->error = false;
