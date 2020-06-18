@@ -24,7 +24,7 @@
                 <div class="row justify-content-center">
                     <div class="col">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe width="560" height="315" src="<?= $resMovie['trailer'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="560" height="315" src="<?= $resMovie['trailer'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>

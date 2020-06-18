@@ -56,7 +56,7 @@
 
                     <?php if ($key['fk_estado'] == 1) : ?>
                         <section class="text-center">
-                            <span id="<?= $key['silla'] ?>" class="ml-3 text-primary" onclick="silla_comprar('<?= $key['silla'] ?>')"> <i class="fas fa-couch"></i> </span>
+                            <span id="<?= $key['silla'] ?>" class="ml-3 text-primary silla"> <i class="fas fa-couch"></i> </span>
                             <div class="row justify-content-center">
                                 <div class="col-6">
                                     <?= $key['silla'] ?>
@@ -87,8 +87,8 @@
                 <div class="card overflow-auto" style="height: 16.3em;">
                     <div class="card-body">
                         <h5 class="card-title">Silla(s) Seleccionadas</h5>
-                        <div id="sillas_seleccionadas">
-
+                        <div class="text-center" id="sillas_seleccionadas">
+                            
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
     </div>
     </div>
     <?php require_once('partials/_footer.php') ?>
-    <script src="../public/js/comprar/silla.js"></script>
+    <script src="../public/js/comprar/silla.js" type="module"></script>
 </body>
 
 </html>
