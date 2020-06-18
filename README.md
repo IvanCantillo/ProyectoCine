@@ -1,2 +1,2 @@
 # Proyecto final CINE
-Reservacion y compra de peliculas 
+Reservacion y compra de peliculas online.
