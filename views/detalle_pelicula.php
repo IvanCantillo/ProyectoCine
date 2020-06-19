@@ -42,7 +42,31 @@
                 <form action="<?= URL_BASE ?>comprar/index" method="post">
                     <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
                     <button type="submit" class="btn btn-success btn-block" <?= $resMovie['fk_sala'] == '' ? 'disabled' : NULL ?>> <?= $resMovie['fk_sala'] == '' ? 'Proximamente...' : 'Seleccionar Sillas' ?> </button>
+                </form>   
+
+                <?php if($_SESSION): ?>
+
+                <?php if($_SESSION['usuario'] && $_SESSION['usuario']['rol'] == 1): ?>
+
+                <form action="<?= URL_BASE ?>Movie/editar" method="POST">
+
+                    <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
+                    <button type="submit" class="btn btn-warning btn-block mt-2">Actualizar</button>
+
                 </form>
+
+                <form action="<?= URL_BASE ?>Movie/eliminar" method="POST">
+
+                    <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
+                    <button type="submit" class="btn btn-danger btn-block mt-2" name="eliminar">Eliminar</button>
+
+                </form>
+                
+                <?php endif ?>
+
+                <?php endif ?>                
+
+                   
             </div>
         </div>
     </div>
