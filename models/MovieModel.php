@@ -4,6 +4,7 @@
         private $id;
         private $nombre;
         private $imagen;
+        private $trailer;
         private $descripcion;
         private $duracion;
         private $fk_sala;
@@ -35,6 +36,14 @@
     
         public function setImagen($imagen){
             $this->imagen = $imagen;
+        }
+
+        public function getTrailer(){
+            return $this->trailer;
+        }
+    
+        public function setTrailer($trailer){
+            $this->trailer = $trailer;
         }
     
         public function getDescripcion(){
@@ -103,6 +112,26 @@
             $extreno = $this->conexion->prepare( $sqlExtreno );
             $extreno->execute();
             return $extreno;
+        }
+
+        public function updateMovieForId(){
+            $sqlUpdate = "UPDATE peliculas SET nombre=:nom, imagen=:img, descripcion=:descrip, trailer = :trailer, fk_sala=:sala WHERE id = :id";
+            $updateMov = $this->conexion->prepare( $sqlUpdate );
+            $updateMov->execute( array( ':id' => $this->id, ':nom' => $this->nombre, ':img' => $this->imagen, ':descrip' => $this->descripcion, ':trailer' => $this->trailer, ':sala' => $this->fk_sala ) );
+            return $updateMov;
+        }
+
+        public function insertMovie(){
+            $sqlInsert = "INSERT INTO peliculas(nombre, imagen, trailer, descripcion, duracion, fk_sala) VALUES (:nombre, :imagen, :trailer, :descrip, :duracion, :sala)";
+            $insertMov = $this->conexion->prepare( $sqlInsert );
+            $insertMov->execute(array( ':nombre' => $this->nombre, ':imagen' => $this->imagen, ':trailer' => $this->trailer, ':descrip' => $this->descripcion, ':duracion' => $this->duracion, ':sala' => $this->fk_sala));
+            return $insertMov;
+        }
+
+        public function deleteMovie(){
+            $sqlDelete = "DELETE FROM peliculas WHERE id = :id";
+            $deleteMov = $this->conexion->prepare( $sqlDelete );
+            $deleteMov->execute( array( ":id" => $this->id ) );
         }
 
     }

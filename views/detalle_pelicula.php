@@ -10,6 +10,7 @@
 
 <body>
     <?php require_once('partials/_navbar.php') ?>
+    
     <div class="container-fluid container-top mb-4">
         <div class="row">
             <div class="col mb-3">
@@ -24,7 +25,7 @@
                 <div class="row justify-content-center">
                     <div class="col">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe loading="lazy" width="560" height="315" src="<?= $resMovie['trailer'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="<?= $resMovie['trailer'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -43,6 +44,30 @@
                     <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
                     <button type="submit" class="btn btn-success btn-block" <?= $resMovie['fk_sala'] == '' ? 'disabled' : NULL ?>> <?= $resMovie['fk_sala'] == '' ? 'Proximamente...' : 'Seleccionar Sillas' ?> </button>
                 </form>
+
+                <?php if($_SESSION): ?>
+
+                <?php if($_SESSION['usuario'] && $_SESSION['usuario']['rol'] == 1): ?>
+
+                <form action="<?= URL_BASE ?>Movie/editar" method="POST">
+
+                    <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
+                    <button type="submit" class="btn btn-warning btn-block mt-2">Actualizar</button>
+
+                </form>
+
+                <form action="<?= URL_BASE ?>Movie/eliminar" method="POST">
+
+                    <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
+                    <button type="submit" class="btn btn-danger btn-block mt-2" name="eliminar">Eliminar</button>
+
+                </form>
+                
+                <?php endif ?>
+
+                <?php endif ?>
+
+
             </div>
         </div>
     </div>

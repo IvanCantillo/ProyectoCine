@@ -18,7 +18,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <?php if ($_SESSION['usuario']['rol'] == 1) : ?>
-                <a class="dropdown-item" href="#">Crear pelicula</a>
+                <a class="dropdown-item" href="<?= URL_BASE. 'Movie/index' ?>">Crear pelicula</a>
                 <a class="dropdown-item" href="<?= URL_BASE ?>user/lista">Ver usuarios</a>
               <?php else: ?>
                 <!-- <a class="dropdown-item" href="#">Perfil</a> -->
