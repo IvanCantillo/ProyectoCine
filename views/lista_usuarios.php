@@ -51,7 +51,7 @@
 
     </div>
     <?php require_once('partials/_footer.php') ?>
-    <script src="../public/js/user/modals.js"></script>
+    <script src="../public/js/modals.js"></script>
 </body>
 
 </html>

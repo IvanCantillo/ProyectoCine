@@ -13,7 +13,7 @@
     <div class="container-fluid container-top mb-4">
         <div class="row">
             <div class="col mb-3">
-                <h4 class="text-uppercase font-weight-bold"> <?= $resMovie['nombre'] ?> </h4>
+                <span class="text-uppercase font-weight-bold h4"> <?= $resMovie['nombre'] ?> </span>
             </div>
         </div>
         <div class="row">
@@ -41,36 +41,36 @@
             <div class="col-6 mx-auto mt-4">
                 <form action="<?= URL_BASE ?>comprar/index" method="post">
                     <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
-                    <button type="submit" class="btn btn-success btn-block" <?= $resMovie['fk_sala'] == '' ? 'disabled' : NULL ?>> <?= $resMovie['fk_sala'] == '' ? 'Proximamente...' : 'Seleccionar Sillas' ?> </button>
-                </form>   
-
-                <?php if($_SESSION): ?>
-
-                <?php if($_SESSION['usuario'] && $_SESSION['usuario']['rol'] == 1): ?>
-
-                <form action="<?= URL_BASE ?>Movie/editar" method="POST">
-
-                    <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
-                    <button type="submit" class="btn btn-warning btn-block mt-2">Actualizar</button>
-
+                    <select class="form-control" id="horario" name="horario">
+                        <option value="0"> Selecciona un horario </option>
+                        <option value="1"> Mañana </option>
+                        <option value="2"> Tarde </option>
+                        <option value="3"> Noche </option>
+                    </select>
+                    <button type="submit" id="seleccionar_sillas" class="btn btn-success btn-block d-none" <?= $resMovie['fk_sala'] == '' ? 'disabled' : NULL ?>> <?= $resMovie['fk_sala'] == '' ? 'Proximamente...' : 'Seleccionar Sillas' ?> </button>
                 </form>
+                <?php if ($_SESSION) : ?>
 
-                <form action="<?= URL_BASE ?>Movie/eliminar" method="POST">
+                    <?php if ($_SESSION['usuario'] && $_SESSION['usuario']['rol'] == 1) : ?>
 
-                    <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
-                    <button type="submit" class="btn btn-danger btn-block mt-2" name="eliminar">Eliminar</button>
+                        <form action="<?= URL_BASE ?>Movie/editar" method="POST">
+                            <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
+                            <button type="submit" class="btn btn-warning btn-block mt-2">Actualizar</button>
+                        </form>
 
-                </form>
-                
+                        <form action="<?= URL_BASE ?>Movie/eliminar" method="POST">
+                            <input type="hidden" name="id" value="<?= $resMovie['id'] ?>">
+                            <button type="submit" class="btn btn-danger btn-block mt-2" name="eliminar">Eliminar</button>
+                        </form>
+
+                    <?php endif ?>
+
                 <?php endif ?>
-
-                <?php endif ?>                
-
-                   
             </div>
         </div>
     </div>
     <?php require_once('partials/_footer.php') ?>
+    <script src="../public/js/comprar/horario.js"></script>
 </body>
 
 </html>

@@ -7,8 +7,6 @@ class MovieController{
         session_start();
         if ($_SESSION['usuario']['rol'] == 1) {
             require_once('views/crear_movie.php');
-            
-
         }else{
             header('Location:'. URL_BASE);
         }

@@ -8,8 +8,9 @@
             if (!isset( $_SESSION['usuario']['id'] )) {
                 header('Location: '. URL_BASE .'user/login');
             }else {
-                if( isset( $_POST['id'] ) ){
+                if( isset( $_POST['id'] ) && isset( $_POST['horario'] ) ){
                     $id = $_POST['id'];
+                    $horario = $_POST['horario'];
     
                     $objMovie = new MovieModel();
                     $objSala = new SalaModel();

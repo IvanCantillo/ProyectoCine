@@ -25,3 +25,4 @@ function deleteUser( id, URL_BASE ) {
                     </div>`;
   return modal;
 }
+

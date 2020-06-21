@@ -29,7 +29,7 @@
                         <?php if ($break == 20) : ?>
                 </div>
                 <div class="row mb-4 justify-content-center">
-                    <?php if ($key['fk_estado'] == 1) : ?>
+                    <?php if ($key['fk_estado_funcion_' . $horario] == 1) : ?>
                         <section class="text-center">
                             <span id="<?= $key['silla'] ?>" class="ml-3 text-primary" onclick="silla_comprar('<?= $key['silla'] ?>')"> <i class="fas fa-couch"></i> </span>
                             <div class="row justify-content-center">
@@ -42,7 +42,7 @@
                     <?php else : ?>
 
                         <section class="text-center">
-                            <span id="<?= $key['silla'] ?>" class="ml-3 text-primary"> <i class="fas fa-couch"></i> </span>
+                            <span id="<?= $ey['silla'] ?>" class="ml-3 text-primary"> <i class="fas fa-couch"></i> </span>
                             <div class="row justify-content-center">
                                 <div class="col-6">
                                     <?= $key['silla'] ?>
@@ -54,7 +54,7 @@
                     <?php $break = 1; ?>
                 <?php else : ?>
 
-                    <?php if ($key['fk_estado'] == 1) : ?>
+                    <?php if ($key['fk_estado_funcion_'.$horario] == 1) : ?>
                         <section class="text-center">
                             <span id="<?= $key['silla'] ?>" class="ml-3 text-primary silla"> <i class="fas fa-couch"></i> </span>
                             <div class="row justify-content-center">
@@ -82,6 +82,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col-12 col-md-6 col-xl-6 col-lg-6 mb-3">
                 <div class="card overflow-auto" style="height: 16.3em;">
@@ -94,7 +95,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-xl-6 col-lg-6">
-                <div class="card" style="height: 16.3em;"">
+                <div class="card" style="height: 16.3em;">
                     <div class=" card-body">
                     <h5 class="card-title"> Total de la compra </h5>
                     <div class="d-flex justify-content-between">
@@ -105,6 +106,15 @@
                         <span>Descuento</span>
                         <span id="descuento">$0</span>
                     </div>
+                    <a href="#" id="verificar_tarjeta"> Verificar tarjeta <i class="fas fa-angle-down"></i></a>
+                    <form id="form_verificar_tarjeta">
+                        <div class="input-group d-none"> 
+                            <input class="form-control" type="text" id="tarjeta" placeholder="Numero de tarjeta">
+                            <div class="input-group-append">
+                                <button class="input-group-text bg-header text-white" type="submit"> <i class="fas fa-check"></i> </button>
+                            </div>
+                        </div>
+                    </form>
                     <hr>
                     <div class="d-flex justify-content-between">
                         <span>Total....</span>

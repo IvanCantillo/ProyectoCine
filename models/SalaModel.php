@@ -3,8 +3,11 @@
     class SalaModel {
         private $id;
         private $silla;
+        private $funcion;
         private $fk_pelicula;
-        private $fk_estado;
+        private $fk_estado_funcion_1;
+        private $fk_estado_funcion_2;
+        private $fk_estado_funcion_3;
         private $sala;
         private $conexion;
 
@@ -27,6 +30,14 @@
         public function setSilla($silla){
             $this->silla = $silla;
         }
+
+        public function getFuncion(){
+            return $this->function;
+        }
+    
+        public function setFuncion($funcion){
+            $this->funcion = $funcion;
+        }
     
         public function getFk_pelicula(){
             return $this->fk_pelicula;
@@ -36,12 +47,28 @@
             $this->fk_pelicula = $fk_pelicula;
         }
     
-        public function getFk_estado(){
-            return $this->fk_estado;
+        public function getFk_estado_funcion_1(){
+            return $this->fk_estado_funcion_1;
         }
     
-        public function setFk_estado($fk_estado){
-            $this->fk_estado = $fk_estado;
+        public function setFk_estado_funcion_1($fk_estado_funcion_1){
+            $this->fk_estado_funcion_1 = $fk_estado_funcion_1;
+        }
+
+        public function getFk_estado_funcion_2(){
+            return $this->fk_estado_funcion_2;
+        }
+    
+        public function setFk_estado_funcion_2($fk_estado_funcion_2){
+            $this->fk_estado_funcion_2 = $fk_estado_funcion_2;
+        }
+
+        public function getFk_estado_funcion_3(){
+            return $this->fk_estado_funcion_3;
+        }
+    
+        public function setFk_estado_funcion_3($fk_estado_funcion_3){
+            $this->fk_estado_funcion_3 = $fk_estado_funcion_3;
         }
 
         public function getSala(){

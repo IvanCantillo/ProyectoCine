@@ -40,6 +40,14 @@ for (var i = 0; i < sillas.length; i++) {
   };
 }
 
+verificar_tarjeta = document.getElementById('verificar_tarjeta');
+
+verificar_tarjeta.addEventListener("click", e => {
+  e.preventDefault(); // pero ¿Que no funciona? yo le quite el alert :V
+  alert( 'Tas pendejo' ); 
+})
+
 btn_comprar.addEventListener("click", () => {
-  // alert('Proximamente se hará esta función');
+  alert('Proximamente se hará esta función');
 });
+

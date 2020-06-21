@@ -47,6 +47,7 @@
                         'id' => $resLogin['id'],
                         'correo' => $resLogin['email'],
                         'nombre' => $resLogin['nombre']  .' '. $resLogin['apellido'],
+                        'tarjeta' => $resLogin['tarjeta'],
                         'rol' => $resLogin['fk_rol']
                     ];
                     $this->error = false;
@@ -92,6 +93,7 @@
 						'id' => $resLogin['id'],
 						'correo' => $resLogin['email'],
                         'nombre' => $resLogin['nombre']  .' '. $resLogin['apellido'],
+                        'tarjeta' => $resLogin['tarjeta'],
                         'rol' => $resLogin['fk_rol']
 					];
                     $this->error = false;
