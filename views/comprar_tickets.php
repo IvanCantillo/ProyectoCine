@@ -31,7 +31,7 @@
                 <div class="row mb-4 justify-content-center">
                     <?php if ($key['fk_estado_funcion_' . $horario] == 1) : ?>
                         <section class="text-center">
-                            <span id="<?= $key['silla'] ?>" class="ml-3 text-primary" onclick="silla_comprar('<?= $key['silla'] ?>')"> <i class="fas fa-couch"></i> </span>
+                            <span id="<?= $key['silla'] ?>" class="ml-3 text-primary silla"> <i class="fas fa-couch"></i> </span>
                             <div class="row justify-content-center">
                                 <div class="col-6">
                                     <?= $key['silla'] ?>
@@ -129,11 +129,15 @@
                         <span>Total....</span>
                         <span id="total">$0</span>
                     </div>
-                    <button class="btn btn-success btn-block mt-4" id="comprar"> Comprar </button>
+                    <button class="btn btn-success btn-block mt-4" disabled id="comprar" data-toggle="modal" data-target="#exampleModal"> Comprar </button>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    <input type="hidden" id="nombre_pelicula" value="<?= $resMovie['nombre'] ?>">
+    <div id="modal">
+        
     </div>
     <?php require_once('partials/_footer.php') ?>
     <script src="../public/js/comprar/silla.js" type="module"></script>

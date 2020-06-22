@@ -11,6 +11,7 @@ async function getTarjeta( data ) {
   return response.json();
 }
 
+const nombre_pelicula = document.getElementById('nombre_pelicula').value;
 const sillas_seleccionadas = document.getElementById("sillas_seleccionadas");
 const sillas = document.getElementsByClassName("silla");
 const valor = document.getElementById("valor");
@@ -29,19 +30,19 @@ const btn_comprar = document.getElementById("comprar");
 // Evento para cada silla.
 for (var i = 0; i < sillas.length; i++) {
     sillas[i].onclick = function () {
-    // console.log( contador_boletas )
+
     if (sillas_compradas[this.getAttribute("id")] == this.getAttribute("id")) {
+      contador_boletas--;
       document.getElementById(this.getAttribute("id")).className = "text-primary ml-3";
       delete sillas_compradas[this.getAttribute("id")];
       sillas_seleccionadas.removeChild(
         document.getElementById(`${this.getAttribute("id")}_agregada`)
       );
-      contador_boletas--;
     } else {
+      contador_boletas++;
       sillas_seleccionadas.innerHTML += `<li id="${this.getAttribute("id")}_agregada" class="list-group-item"> <i class="fas fa-couch"></i> ${this.getAttribute("id")} </li>`;
       document.getElementById(this.getAttribute("id")).className = "text-success ml-3";
       sillas_compradas[this.getAttribute("id")] = this.getAttribute("id");
-      contador_boletas++;
     }
     var subValor = valor_silla * contador_boletas;
     valor.innerHTML = "$" + subValor;
@@ -67,6 +68,13 @@ for (var i = 0; i < sillas.length; i++) {
         descuento_tarjeta.innerText = "$0";
         total.innerHTML = "$" + subValor;
       }
+    }
+    
+    //Boton Comprar
+    if( contador_boletas > 0 ){
+      btn_comprar.removeAttribute('disabled');
+    }else{
+      btn_comprar.setAttribute('disabled', 'true');
     }
   };
 }
@@ -108,6 +116,34 @@ if(verificar_tarjeta != null){
 }
 
 btn_comprar.addEventListener("click", () => {
-  alert('Proximamente se hará esta función');
+  // window.open(URL_BASE + 'user/generador_pdf', '_blank');
+  let modal = document.getElementById('modal');
+  modal.innerHTML = `
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ¿Desea realizar la compra para la pelicula <b>${ nombre_pelicula } </b>
+            <p> Detalle de la compra: </p>
+            <p> Numero de boletas: ${ contador_boletas } </p>
+            <p> Precio unitario: $${ valor_silla }  </p>
+            <p> Descuento sillas: $${ ( contador_boletas > 3 ) ? descuento_sillas : '0' } </p>
+            <p> Descuento tarjeta: $${ ( vip ) ?  descuento_tarjeta_vip : '0' } </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  return modal;
 });
 

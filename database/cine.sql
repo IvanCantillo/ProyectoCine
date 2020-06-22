@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-06-2020 a las 01:49:36
+-- Tiempo de generación: 23-06-2020 a las 00:30:22
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -510,6 +510,22 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `telefono`, `email`, `passwo
 (8, 'Administrador', 'Cine', '3023700505', 'admin@admin.com', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', NULL, NULL, 1, 1),
 (13, 'Prueba', 'Prueba', '123', 'prueba@prueba.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '07684321672', '2012-04-10', 2, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id` int(11) NOT NULL,
+  `fk_usuario` int(11) NOT NULL,
+  `fk_pelicula` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `descuento_silla` int(11) NOT NULL,
+  `descuento_tarjeta` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 --
 -- Índices para tablas volcadas
 --
@@ -578,6 +594,14 @@ ALTER TABLE `usuarios`
   ADD KEY `fk_rol` (`fk_rol`);
 
 --
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_usuario` (`fk_usuario`),
+  ADD KEY `fk_pelicula` (`fk_pelicula`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -630,6 +654,12 @@ ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -672,6 +702,13 @@ ALTER TABLE `sala_3`
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`fk_estado`) REFERENCES `estados` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `usuarios_ibfk_3` FOREIGN KEY (`fk_rol`) REFERENCES `roles` (`id`);
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`fk_pelicula`) REFERENCES `peliculas` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
