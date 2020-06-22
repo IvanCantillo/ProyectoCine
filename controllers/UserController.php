@@ -118,6 +118,21 @@
                 header('Location:'. URL_BASE .'inicio/');
             }
         }
+        public function tarjeta() {
+            session_start();
+            if( isset( $_POST['tarjeta'] ) ){
+                $objTarjeta = new UserModel();
+                $objTarjeta->setTarjeta( $_POST['tarjeta'] );
+                $resTarjeta = $objTarjeta->tarjeta();
+                if( $resTarjeta == 'tarjeta-no-exist' ){
+                    echo json_encode( 'error' );
+                }else{
+                    echo json_encode( $resTarjeta );
+                }
+            }else{
+                header('Location:'. URL_BASE .'inicio/');
+            }
+        }
         public function lista(){
             session_start();
             if (!isset( $_SESSION['usuario']['id'] )  || $_SESSION['usuario']['rol'] != 1) {

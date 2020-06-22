@@ -103,18 +103,23 @@
                         <span id="valor">$0</span>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <span>Descuento</span>
+                        <span>Descuento por sillas</span>
                         <span id="descuento">$0</span>
                     </div>
-                    <?php if($_SESSION['usuario']['rol'] == 2): ?>
+                    <div class="d-flex justify-content-between">
+                        <span>Descuento por tarjeta</span>
+                        <span id="descuento_tarjeta">$0</span>
+                    </div>
+                    <?php if($_SESSION['usuario']['rol'] != 3): ?>
                     <a href="#" id="verificar_tarjeta"> Verificar tarjeta <i class="fas fa-angle-down"></i></a>
                     <form id="form_verificar_tarjeta">
                         <div class="input-group d-none" id="div_verificar"> 
-                            <input class="form-control" type="text" id="tarjeta" placeholder="Numero de tarjeta" value="<?= $_SESSION['usuario']['tarjeta']  ?>">
+                            <input class="form-control" type="text" id="tarjeta" name="tarjeta" placeholder="Numero de tarjeta" value="<?= $_SESSION['usuario']['tarjeta']  ?>">
                             <div class="input-group-append">
                                 <button class="input-group-text bg-header text-white" id="btn_verificar" type="submit"> <i class="fas fa-check"></i> </button>
                             </div>
                         </div>
+                        <p class="text-danger" id="error_tarjeta"> </p>
                     </form>
 
                     <?php endif ?>

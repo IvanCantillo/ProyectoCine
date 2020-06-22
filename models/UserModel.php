@@ -124,6 +124,16 @@
             $tarjetas->execute();
             return $tarjetas;
         }
+        public function tarjeta() {
+            $sqlTarjeta = "SELECT tarjeta FROM usuarios WHERE tarjeta = :tarjeta";
+            $tarjeta = $this->conexion->prepare( $sqlTarjeta );
+            $tarjeta->execute( array( ":tarjeta" => $this->tarjeta ) );
+            if( $tarjeta->rowCount() > 0 ){
+                return $tarjeta->fetch( PDO::FETCH_ASSOC );
+            }else {
+                return 'tarjeta-no-exist';
+            }
+        }
         public function update() {
             $sqlUpdate = "UPDATE `usuarios` SET `nombre` = :nom, `apellido` = :ape, `telefono` = :tel, `email` = :email, `fk_rol` = :fk_rol, `fk_estado` = :fk_estado  WHERE `usuarios`.`id` = :id";
             $update = $this->conexion->prepare( $sqlUpdate );
