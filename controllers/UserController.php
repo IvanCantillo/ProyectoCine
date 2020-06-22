@@ -48,7 +48,8 @@
                         'correo' => $resLogin['email'],
                         'nombre' => $resLogin['nombre']  .' '. $resLogin['apellido'],
                         'tarjeta' => $resLogin['tarjeta'],
-                        'rol' => $resLogin['fk_rol']
+                        'rol' => $resLogin['fk_rol'],
+                        'tarjeta' => $resLogin['tarjeta']
                     ];
                     $this->error = false;
                     $this->message = 'ok';

@@ -40,12 +40,35 @@ for (var i = 0; i < sillas.length; i++) {
   };
 }
 
-verificar_tarjeta = document.getElementById('verificar_tarjeta');
+//------------------------------------------------Tarjeta-------------------------------------------------
 
-verificar_tarjeta.addEventListener("click", e => {
-  e.preventDefault(); // pero ¿Que no funciona? yo le quite el alert :V
-  alert( 'Tas pendejo' ); 
-})
+var verificar_tarjeta = document.getElementById('verificar_tarjeta');
+
+if(verificar_tarjeta != null){
+    var btn_verficar  = document.getElementById('btn_verificar');
+
+    var tarjeta  = document.getElementById('tarjeta');
+
+
+    verificar_tarjeta.addEventListener("click", e => {
+      e.preventDefault();
+      verificar_tarjeta.classList.add('d-none');
+      var div = document.getElementById('div_verificar');
+      div.classList.add('mt-2');
+      div.classList.remove('d-none');
+
+    });
+
+    btn_verficar.addEventListener("click" , e => {
+      e.preventDefault();
+        btn_verficar.classList.add('d-none');
+        tarjeta.setAttribute('readonly', '');
+    });
+}else{
+  
+}
+
+
 
 btn_comprar.addEventListener("click", () => {
   alert('Proximamente se hará esta función');
