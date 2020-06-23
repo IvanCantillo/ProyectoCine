@@ -28,7 +28,7 @@
         public function setNombre($nombre){
             $this->nombre = $nombre;
         }
-        public function getApellido(){
+        public function geApellio(){
             return $this->apellido;
         }
         public function setApellido($apellido){
@@ -85,7 +85,6 @@
             $getAll->execute();
             return $getAll;
         }
-
         public function getUserById() {
             $sqlUser = "SELECT usuarios.*, roles.rol FROM usuarios INNER JOIN roles ON usuarios.fk_rol = roles.id WHERE usuarios.id = :id";
             $user = $this->conexion->prepare( $sqlUser );

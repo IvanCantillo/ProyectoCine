@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2020 a las 00:30:22
+-- Tiempo de generación: 24-06-2020 a las 00:24:19
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -508,7 +508,8 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `telefono`, `email`, `passwo
 (2, 'Samir', 'Arroyave Charris', '3005740633', 'samirarroyavecharris@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', NULL, NULL, 1, 1),
 (3, 'Ivan jose', 'Cantillo polo', '3023500707', 'ijcantillo49@misena.edu.co', '1de227589665d8f2a1e4c716c619b4174abdccdcc9ae2fa1aa7156307e00f8ef', '24661243937', '2002-04-22', 2, 1),
 (8, 'Administrador', 'Cine', '3023700505', 'admin@admin.com', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', NULL, NULL, 1, 1),
-(13, 'Prueba', 'Prueba', '123', 'prueba@prueba.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '07684321672', '2012-04-10', 2, 1);
+(13, 'Prueba', 'Prueba', '123', 'prueba@prueba.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '07684321672', '2012-04-10', 2, 1),
+(14, 'Samir', 'Usuario', '1234567', 'samirUsuario@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', NULL, NULL, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -523,8 +524,18 @@ CREATE TABLE `ventas` (
   `cantidad` int(11) NOT NULL,
   `descuento_silla` int(11) NOT NULL,
   `descuento_tarjeta` int(11) NOT NULL,
+  `precio` int(30) NOT NULL,
+  `fecha_creacion` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`id`, `fk_usuario`, `fk_pelicula`, `cantidad`, `descuento_silla`, `descuento_tarjeta`, `precio`, `fecha_creacion`, `total`) VALUES
+(1, 14, 14, 3, 0, 0, 15000, '2020-06-23', 45000),
+(2, 3, 9, 1, 0, 0, 15000, '2020-06-23', 15000);
 
 --
 -- Índices para tablas volcadas
@@ -651,13 +662,13 @@ ALTER TABLE `sala_3`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
