@@ -47,6 +47,7 @@
                         'id' => $resLogin['id'],
                         'correo' => $resLogin['email'],
                         'nombre' => $resLogin['nombre']  .' '. $resLogin['apellido'],
+                        'telefono' => $resLogin['telefono'],
                         'tarjeta' => $resLogin['tarjeta'],
                         'rol' => $resLogin['fk_rol'],
                         'tarjeta' => $resLogin['tarjeta']
@@ -94,6 +95,7 @@
 						'id' => $resLogin['id'],
 						'correo' => $resLogin['email'],
                         'nombre' => $resLogin['nombre']  .' '. $resLogin['apellido'],
+                        'telefono' => $resLogin['telefono'],
                         'tarjeta' => $resLogin['tarjeta'],
                         'rol' => $resLogin['fk_rol']
 					];
@@ -145,6 +147,14 @@
                 $objUser = new UserModel();
                 $resUsers = $objUser->getAll();
                 require_once ('views/lista_usuarios.php');
+            }
+        }
+        public function perfil(){
+            session_start();
+            if( isset( $_SESSION['usuario']['id'] ) ){
+                require_once ('views/perfil.php');
+            }else{
+                header('Location: '. URL_BASE .'inicio/');
             }
         } 
         public function editar() {

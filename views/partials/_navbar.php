@@ -19,10 +19,10 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <?php if ($_SESSION['usuario']['rol'] == 1) : ?>
                 <a class="dropdown-item" href="<?= URL_BASE ?>Movie/index">Crear pelicula</a>
-                <a class="dropdown-item" href="<?= URL_BASE ?>user/lista">Ver usuarios</a>
+                <a class="dropdown-item" href="<?= URL_BASE ?>User/lista">Ver usuarios</a>
                 <a class="dropdown-item" href="<?= URL_BASE ?>Comprar/reporte">Ventas</a>
               <?php else: ?>
-                <!-- <a class="dropdown-item" href="#">Perfil</a> -->
+                <a class="dropdown-item" href="<?= URL_BASE ?>User/perfil">Perfil</a>
                 <a class="dropdown-item" href="<?= URL_BASE ?>Comprar/lista">Peliculas Compradas</a>
               <?php endif; ?>
               <hr>
