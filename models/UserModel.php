@@ -146,4 +146,12 @@
             return $delete;
         }
 
+        public function update_password() {
+            $sqlUpPass = 'UPDATE usuarios SET password = :pass WHERE id = :id';
+            $UpPass = $this->conexion->prepare( $sqlUpPass );
+            $UpPass->execute( array( ":id" => $this->id, ":pass" => $this->password ) );
+            return $UpPass;
+        }
+
+
     }

@@ -157,6 +157,37 @@
                 header('Location: '. URL_BASE .'inicio/');
             }
         } 
+
+        public function passwordreset(){
+            session_start();
+            if ($_SESSION && $_SESSION['usuario']['id']) {
+
+                require_once('views/cambiar_contraseña.php');
+                
+            }else{
+                header('Location: '. URL_BASE .'inicio/');
+            }
+        }
+
+        public function actualizarpassword(){
+            session_start();
+            if (isset($_POST['nuevapass']) && $_SESSION) {
+
+                $nueva_pass = $_POST['nuevapass'];
+
+                $objUpPass = new UserModel();
+                $objUpPass->setId($_SESSION['usuario']['id']);
+                $nueva_contra = $objUpPass->password_encrypt($nueva_pass);
+                $objUpPass->setPassword($nueva_contra);
+                $objUpPass->update_password();
+
+                header('Location: '. URL_BASE .'User/perfil');
+
+            }else{
+                header('Location: '. URL_BASE .'inicio/');
+            }
+        }
+
         public function editar() {
             session_start();
             if ( isset( $_POST['id'] ) && $_SESSION['usuario']['rol'] == 1 ) {
