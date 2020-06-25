@@ -1,7 +1,7 @@
 import { URL_BASE } from "../parametros.js";
 
 async function edit(data) {
-  let response = await fetch(URL_BASE + "user/update", {
+  let response = await fetch(URL_BASE + "admin/update", {
     method: "POST",
     headers: {
       Accept: "application/json",

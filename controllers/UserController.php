@@ -38,17 +38,25 @@
                 $objUser ->setEmail( $email );
                 $objUser->setPassword( $password );
                 $resLogin = $objUser->login();
-
-                if ($resLogin == 'user-not-exist') {
+                if( $resLogin == 'user-bloqueado' ){
+                    $this->error = true;
+                    $this->message = 'user-bloqueado';
+                }else if ($resLogin == 'user-not-exist') {
                     $this->error = true;
                     $this->message = 'El usuario no existe';
+                }else if( $resLogin == 'password-error' ){
+                    $this->error = true;
+                    $this->message = 'password-error';
                 }else{
                     $_SESSION['usuario'] = [
                         'id' => $resLogin['id'],
                         'correo' => $resLogin['email'],
                         'nombre' => $resLogin['nombre']  .' '. $resLogin['apellido'],
+                        'nombre_usu' => $resLogin['nombre'],
+                        'apellido_usu' => $resLogin['apellido'],
                         'telefono' => $resLogin['telefono'],
                         'tarjeta' => $resLogin['tarjeta'],
+                        'estado_vip' => $resLogin['estado_vip'],
                         'rol' => $resLogin['fk_rol'],
                         'tarjeta' => $resLogin['tarjeta']
                     ];
@@ -71,17 +79,13 @@
                 $email = $_POST['email'];
                 $password = $objUser->password_encrypt($_POST['password']);
                 $telefono = $_POST['telefono'];
-                $tarjeta = ($_POST['tarjeta'] == '') ? NULL: $_POST['tarjeta'];
-                $nacimiento = ($_POST['nacimiento'] == '') ? NULL: $_POST['nacimiento'];
 
                 $objUser->setNombre( $nombre );
                 $objUser->setApellido($apellido); 
                 $objUser->setEmail($email); 
                 $objUser->setPassword( $password ); 
                 $objUser->setTelefono($telefono); 
-                $objUser->setTarjeta($tarjeta); 
-                $objUser->setFecha_nacimiento($nacimiento);
-                $objUser->setFk_rol( ($tarjeta == null)? 3 : 2 );
+                $objUser->setFk_rol( 3 );
                 $objUser->setFk_estado( 1 );
 
                 $resRegister = $objUser->register();
@@ -93,11 +97,15 @@
                     $resLogin = $objUser->login();
                     $_SESSION['usuario'] = [
 						'id' => $resLogin['id'],
-						'correo' => $resLogin['email'],
+                        'correo' => $resLogin['email'],
                         'nombre' => $resLogin['nombre']  .' '. $resLogin['apellido'],
+                        'nombre_usu' => $resLogin['nombre'],
+                        'apellido_usu' => $resLogin['apellido'],
                         'telefono' => $resLogin['telefono'],
                         'tarjeta' => $resLogin['tarjeta'],
-                        'rol' => $resLogin['fk_rol']
+                        'estado_vip' => $resLogin['estado_vip'],
+                        'rol' => $resLogin['fk_rol'],
+                        'tarjeta' => $resLogin['tarjeta']
 					];
                     $this->error = false;
                     $this->message = 'ok';
@@ -139,16 +147,6 @@
                 header('Location:'. URL_BASE .'inicio/');
             }
         }
-        public function lista(){
-            session_start();
-            if (!isset( $_SESSION['usuario']['id'] )  || $_SESSION['usuario']['rol'] != 1) {
-                header('Location: '. URL_BASE .'inicio/');
-            }else{
-                $objUser = new UserModel();
-                $resUsers = $objUser->getAll();
-                require_once ('views/lista_usuarios.php');
-            }
-        }
         public function perfil(){
             session_start();
             if( isset( $_SESSION['usuario']['id'] ) ){
@@ -157,7 +155,6 @@
                 header('Location: '. URL_BASE .'inicio/');
             }
         } 
-
         public function passwordreset(){
             session_start();
             if ($_SESSION && $_SESSION['usuario']['id']) {
@@ -168,7 +165,26 @@
                 header('Location: '. URL_BASE .'inicio/');
             }
         }
+        public function updatePerfil(){
+            session_start();
+            if( $_SESSION && isset( $_SESSION['usuario']['id']) && $_POST['upda_nombre'] ){
 
+                $objUpdatePerfil = new UserModel();
+
+                $objUpdatePerfil->setId($_SESSION['usuario']['id']);
+
+                $objUpdatePerfil->setNombre($_POST['upda_nombre']);
+                $objUpdatePerfil->setApellido($_POST['upda_apellido']);
+                $objUpdatePerfil->setTelefono($_POST['upda_telefono']);
+                $objUpdatePerfil->setEmail($_POST['upda_email']);
+
+                $objUpdatePerfil->updateProfile();
+
+                header('Location: '. URL_BASE .'User/perfil');
+            }else{
+                header('Location: '. URL_BASE .'inicio/');
+            }
+        }
         public function actualizarpassword(){
             session_start();
             if (isset($_POST['nuevapass']) && $_SESSION) {
@@ -187,47 +203,24 @@
                 header('Location: '. URL_BASE .'inicio/');
             }
         }
-
-        public function editar() {
+        public function user_vip(){
             session_start();
-            if ( isset( $_POST['id'] ) && $_SESSION['usuario']['rol'] == 1 ) {
+            if( isset( $_POST['id'] ) ){
                 $objUser = new UserModel();
                 $objUser->setId( $_POST['id'] );
-                $resUser = $objUser->getUserById();
-                require_once ('views/editar_usuario.php');
-            }else {
+                $objUser->setEstado_vip( isset( $_POST['vip'] ) ? $_POST['vip'] : '3' );
+                $_SESSION['usuario']['estado_vip'] = isset( $_POST['estado_vip'] ) ? $_POST['estado_vip'] : '3';
+                $objUser->setTarjeta( isset( $_POST['tarjeta'] ) ? $_POST['tarjeta'] : null );
+                $objUser->setFk_rol( isset( $_POST['rol'] ) ? $_POST['rol'] : 3 );
+                $objUser->updateEstadoSolicitud();
+                if( isset( $_POST['usuario'] ) ){
+                    header( 'Location: '. URL_BASE .'user/perfil' );
+                }else {
+                    echo json_encode( 'ok' );
+                }                
+            }else{
                 header('Location: '. URL_BASE .'inicio/');
             }
-        }
-        public function update() {
-            session_start();
-            if( isset( $_POST['email'] ) ){
-                $objUser = new UserModel();
-                $objUser->setId( $_POST['id'] );
-                $objUser->setNombre( $_POST['nombre'] );
-                $objUser->setApellido( $_POST['apellido'] );
-                $objUser->setEmail( $_POST['email'] );
-                $objUser->setTelefono( $_POST['telefono'] );
-                $objUser->setFk_rol( $_POST['rol'] );
-                $objUser->setFk_estado( $_POST['estado'] );
-                $objUser->update();
-                
-                echo json_encode( $this->response( false, 'ok' ) );
-
-            }else {
-                header('Location: '. URL_BASE .'inicio/');
-            }
-        }
-        public function eliminar() {
-            session_start();  
-            if (isset( $_POST['id'] )) {
-                $objUser = new UserModel();
-                $objUser->setId( $_POST['id'] );
-                $objUser->delete();
-                header('Location: '. URL_BASE .'user/lista');
-            }else {
-                header('Location: '. URL_BASE .'inicio/');
-            }      
         }
         public function cerrar_session() {
             session_start();

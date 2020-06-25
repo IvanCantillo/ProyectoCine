@@ -31,13 +31,15 @@
         }
         public function reporte(){
             session_start();
-            if($_SESSION['usuario']['rol'] == 1){
+            if($_SESSION && $_SESSION['usuario']['rol'] == 1){
 
                 $objReport = new VentasModel();
 
                 $resReporte = $objReport->AllVentas();
 
                 require_once('views/reporte_comprar.php');
+            }else{
+                header('location: '. URL_BASE .'inicio/');
             }
         }
         public function lista(){

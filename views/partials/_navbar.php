@@ -18,12 +18,14 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <?php if ($_SESSION['usuario']['rol'] == 1) : ?>
-                <a class="dropdown-item" href="<?= URL_BASE ?>Movie/index">Crear pelicula</a>
-                <a class="dropdown-item" href="<?= URL_BASE ?>User/lista">Ver usuarios</a>
-                <a class="dropdown-item" href="<?= URL_BASE ?>Comprar/reporte">Ventas</a>
-              <?php else: ?>
-                <a class="dropdown-item" href="<?= URL_BASE ?>User/perfil">Perfil</a>
-                <a class="dropdown-item" href="<?= URL_BASE ?>Comprar/lista">Peliculas Compradas</a>
+                  <a class="dropdown-item" href="<?= URL_BASE ?>Movie/index">Crear pelicula</a>
+                  <a class="dropdown-item" href="<?= URL_BASE ?>Admin/asignar">Salas</a>
+                  <a class="dropdown-item" href="<?= URL_BASE ?>Admin/listaUsuarios">Ver usuarios</a>
+                  <a class="dropdown-item" href="<?= URL_BASE ?>Comprar/reporte">Ventas</a>
+                  <a class="dropdown-item" href="<?= URL_BASE ?>Admin/solicitudesVip">Solicitudes VIP</a>
+                <?php else: ?>
+                  <a class="dropdown-item" href="<?= URL_BASE ?>User/perfil">Perfil</a>
+                  <a class="dropdown-item" href="<?= URL_BASE ?>Comprar/lista">Peliculas Compradas</a>
               <?php endif; ?>
               <hr>
               <a class="dropdown-item" href="<?= URL_BASE . 'user/cerrar_session' ?>">Salir</a>

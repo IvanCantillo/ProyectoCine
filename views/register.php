@@ -19,7 +19,7 @@
                 <div class="card shadow content-register-right">
                     <div class="card-body">
                         <h5 class="card-title">Registro</h5>
-                        <form method="post" id="form_register">
+                        <form id="form_register">
                             <div class="input-group mb-2">
                                 <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombres" autofocus>
                                 <div class="input-group-append">
@@ -56,30 +56,6 @@
                                 <input class="form-control" type="password" placeholder="Repetir Contraseña"  id="passsword_confirm">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="my-addon"> <i class="fas fa-lock"></i> </span>
-                                </div>
-                            </div>
-                            <!--  Seccion escondida  -->
-                            <div class="d-none" id="seccion_vip">
-                                <p class="text-secondary"> <i class="fas fa-hand-point-down"></i> Nunca des este numero <i class="fas fa-hand-point-down"></i> </p>
-                                <div class="input-group mb-3">
-                                    <input class="form-control" type="text" placeholder="Tarjeta" id="tarjeta" readonly name="tarjeta">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="my-addon"> <i class="fas fa-credit-card"></i> </span>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input class="form-control" id="nacimiento" type="date" placeholder="Fecha nacimiento" name="nacimiento">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="my-addon"> <i class="fas fa-calendar-alt"></i> </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="ser_vip" name="ser_vip">
-                                    <label class="form-check-label" for="gridCheck">
-                                        Ser vip
-                                    </label>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">

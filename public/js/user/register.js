@@ -1,19 +1,5 @@
 import { URL_BASE } from '../parametros.js';
 
-async function get_tarjetas() {
-  var formData = new FormData();
-  formData.append("tarjetas", "si hay");
-
-  const response = await fetch( URL_BASE + "user/tarjetas", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-    },
-    body: formData,
-  });
-  return await response.json();
-}
-
 async function register(data) {
   const response = await fetch( URL_BASE + "user/signup", {
     method: "POST",
@@ -24,46 +10,6 @@ async function register(data) {
   });
   return await response.json();
 }
-
-function generar_tarjeta() {
-  let codigo = "";
-  let existe = true;
-  while (existe) {
-    for (let i = 0; i < 11; i++) {
-      codigo += Math.round(Math.random() * 9);
-    }
-    existe = array.some((valor) => valor == codigo);
-  }
-  return codigo;
-}
-
-var array = [];
-// ---------- VIP ----------
-const seccion_vip = document.getElementById("seccion_vip");
-const ser_vip = document.getElementById("ser_vip");
-var tarjeta = document.getElementById("tarjeta");
-const nacimiento = document.getElementById("nacimiento");
-
-ser_vip.addEventListener("click", async () => {
-  if (ser_vip.checked) {
-    seccion_vip.classList.remove("d-none");
-    var res = await get_tarjetas();
-    res.forEach((element) => {
-      let existe = false;
-      existe = array.some((valor) => valor == element["tarjeta"]);
-      if (!existe) {
-        array.push(element["tarjeta"]);
-      }
-    });
-    tarjeta.value = generar_tarjeta();
-    nacimiento.setAttribute("required", "");
-  } else {
-    seccion_vip.className = "d-none";
-    nacimiento.removeAttribute("required");
-    tarjeta.value = "";
-    nacimiento.value = "";
-  }
-});
 
 // ---------- REGISTER ----------
 const form_register = document.getElementById("form_register");

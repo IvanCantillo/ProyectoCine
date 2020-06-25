@@ -1,3 +1,5 @@
+var actualizar_modal = document.getElementById('actualizar_modal'); 
+
 function deleteUser( id, URL_BASE ) {
     let modal = document.getElementById('modal');
     modal.innerHTML =  `
@@ -14,7 +16,7 @@ function deleteUser( id, URL_BASE ) {
                                         ¿Estas sesguro que quieres eliminar este usuario?
                                     </div>
                                     <div class="modal-footer">
-                                    <form action="${URL_BASE}user/eliminar" method="POST">
+                                    <form action="${URL_BASE}admin/eliminar" method="POST">
                                         <input type="hidden" name="id" value="${id}">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary">Eliminar</button>
@@ -25,4 +27,5 @@ function deleteUser( id, URL_BASE ) {
                     </div>`;
   return modal;
 }
+
 

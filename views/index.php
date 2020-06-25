@@ -11,7 +11,7 @@
 
 <body>
     <?php require_once('partials/_navbar.php') ?>
-    <img id="img-banner" class="img-fluid" src="https://cdn.pixabay.com/photo/2019/11/07/20/48/cinema-4609877_1280.jpg">
+    <img id="img-banner" src="https://cdn.pixabay.com/photo/2019/02/27/02/22/theater-4023278_1280.jpg">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 my-4">
@@ -25,19 +25,19 @@
                                         <div class="col-4 col-md-3 col-lg-3 col-xl-3">
                                             <form action="<?= URL_BASE ?>Inicio/detalle" method="post">
                                                 <input type="hidden" name="id" value="<?= $seccion_1[0]['id'] ?>">
-                                                <button type="submit" class="btn"><img src="<?= $seccion_1[0]['imagen'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_1[0]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
+                                                <button type="submit" class="btn"><img src="<?= $seccion_1[0]['imagen'] ?>" title="<?= $seccion_1[0]['nombre'] ?>" alt="<?= $seccion_1[0]['nombre'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_1[0]['id'] ?>" class="w-100 height-card-movie"></button>
                                             </form>
                                         </div>
                                         <div class="col-4 col-md-3 col-lg-3 col-xl-3">
                                             <form action="<?= URL_BASE ?>inicio/detalle" method="post">
                                                 <input type="hidden" name="id" value="<?= $seccion_1[1]['id'] ?>">
-                                                <button type="submit" class="btn"><img src="<?= $seccion_1[1]['imagen'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_1[1]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
+                                                <button type="submit" class="btn"><img src="<?= $seccion_1[1]['imagen'] ?>" title="<?= $seccion_1[1]['nombre'] ?>" alt="<?= $seccion_1[1]['nombre'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_1[1]['id'] ?>" class="w-100 height-card-movie"></button>
                                             </form>
                                         </div>
                                         <div class="col-4 col-md-3 col-lg-3 col-xl-3">
                                             <form action="<?= URL_BASE ?>inicio/detalle" method="post">
                                                 <input type="hidden" name="id" value="<?= $seccion_1[2]['id'] ?>">
-                                                <button type="submit" class="btn"><img src="<?= $seccion_1[2]['imagen'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_1[2]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
+                                                <button type="submit" class="btn"><img src="<?= $seccion_1[2]['imagen'] ?>" title="<?= $seccion_1[2]['nombre'] ?>" alt="<?= $seccion_1[2]['nombre'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_1[2]['id'] ?>" class="w-100 height-card-movie"></button>
                                             </form>
                                         </div>
                                     </div>
@@ -47,19 +47,19 @@
                                         <div class="col-4 col-md-3 col-lg-3 col-xl-3">
                                             <form action="<?= URL_BASE ?>inicio/detalle" method="post">
                                                 <input type="hidden" name="id" value="<?= $seccion_2[0]['id'] ?>">
-                                                <button type="submit" class="btn"><img src="<?= $seccion_2[0]['imagen'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_2[0]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
+                                                <button type="submit" class="btn"><img src="<?= $seccion_2[0]['imagen'] ?>" title="<?= $seccion_2[0]['nombre'] ?>" alt="<?= $seccion_2[0]['nombre'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_2[0]['id'] ?>" class="w-100 height-card-movie"></button>
                                             </form>
                                         </div>
                                         <div class="col-4 col-md-3 col-lg-3 col-xl-3">
                                             <form action="<?= URL_BASE ?>inicio/detalle" method="post">
                                                 <input type="hidden" name="id" value="<?= $seccion_2[1]['id'] ?>">
-                                                <button type="submit" class="btn"><img src="<?= $seccion_2[1]['imagen'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_2[1]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
+                                                <button type="submit" class="btn"><img src="<?= $seccion_2[1]['imagen'] ?>" alt="<?= $seccion_2[1]['nombre'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_2[1]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
                                             </form>
                                         </div>
                                         <div class="col-4 col-md-3 col-lg-3 col-xl-3">
                                             <form action="<?= URL_BASE ?>inicio/detalle" method="post">
                                                 <input type="hidden" name="id" value="<?= $seccion_2[2]['id'] ?>">
-                                                <button type="submit" class="btn"><img src="<?= $seccion_2[2]['imagen'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_2[2]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
+                                                <button type="submit" class="btn"><img src="<?= $seccion_2[2]['imagen'] ?>" alt="<?= $seccion_2[2]['nombre'] ?>" data-toggle="modal" data-target="#modal_<?= $seccion_2[2]['id'] ?>" class="w-100 height-card-movie" alt="..."></button>
                                             </form>
                                         </div>
                                     </div>

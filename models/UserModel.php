@@ -9,6 +9,7 @@
         private $fecha_nacimiento;
         private $email;
         private $password;
+        private $estado_vip;
         private $fk_rol;
         private $fk_estado;
         private $conexion;
@@ -64,6 +65,12 @@
         public function setPassword($password){
             $this->password = $password;
         }
+        public function getEstado_vip(){
+            return $this->estado_vip;
+        }
+        public function setEstado_vip($estado_vip){
+            $this->estado_vip = $estado_vip;
+        }
         public function getFk_rol(){
             return $this->fk_rol;
         }
@@ -96,10 +103,21 @@
             $email = $this->conexion->prepare( $sqlEmail );
             $email->execute( array( ":email" => $this->email ) );
             if( $email->rowCount() > 0 ){
-                $sqlLogin = $sqlEmail .=  " AND password = :password";
-                $login = $this->conexion->prepare( $sqlLogin );
-                $login->execute( array( ":email" => $this->email, ":password" => $this->password ) );
-                return $login->fetch( PDO::FETCH_ASSOC );
+                $sqlBloqueado = $sqlEmail .= " AND fk_estado = 1";
+                $bloqueado = $this->conexion->prepare( $sqlBloqueado );
+                $bloqueado->execute( array( ":email" => $this->email ) );
+                if( $bloqueado->rowCount() > 0 ){
+                    $sqlLogin = $sqlEmail .=  " AND password = :password";
+                    $login = $this->conexion->prepare( $sqlLogin );
+                    $login->execute( array( ":email" => $this->email, ":password" => $this->password ) );
+                    if( $login->rowCount() > 0 ){
+                        return $login->fetch( PDO::FETCH_ASSOC );
+                    }else {
+                        return 'password-error';
+                    }
+                }else{
+                    return 'user-bloqueado';
+                }
             }else {
                 return 'user-not-exist';
             }   
@@ -111,9 +129,9 @@
             if ($email->rowCount() > 0) {
                 return 'user-exist';
             } else {
-                $sqlRegister = 'INSERT INTO `usuarios`(`nombre`, `apellido`, `telefono`, `email`, `password`, `tarjeta`, `fecha_nacimiento`, `fk_rol`, `fk_estado`) VALUES (:nom, :ape, :tel, :email, :pass, :tar, :naci, :fk_rol, :fk_estado)';
+                $sqlRegister = 'INSERT INTO `usuarios`(`nombre`, `apellido`, `telefono`, `email`, `password`, `fk_rol`, `fk_estado`) VALUES (:nom, :ape, :tel, :email, :pass, :fk_rol, :fk_estado)';
                 $register = $this->conexion->prepare( $sqlRegister );
-                $register->execute( array( ':nom' => $this->nombre, ':ape' => $this->apellido, ':tel' => $this->telefono, ':email' => $this->email, ':pass' => $this->password, ':tar' => $this->tarjeta, ':naci' => $this->fecha_nacimiento, ':fk_rol' => $this->fk_rol, ':fk_estado' => $this->fk_estado ) );
+                $register->execute( array( ':nom' => $this->nombre, ':ape' => $this->apellido, ':tel' => $this->telefono, ':email' => $this->email, ':pass' => $this->password, ':fk_rol' => $this->fk_rol, ':fk_estado' => $this->fk_estado ) );
                 return $register;
             }
         }
@@ -145,13 +163,29 @@
             $delete->execute( array( ":id" => $this->id ) );
             return $delete;
         }
-
         public function update_password() {
             $sqlUpPass = 'UPDATE usuarios SET password = :pass WHERE id = :id';
             $UpPass = $this->conexion->prepare( $sqlUpPass );
             $UpPass->execute( array( ":id" => $this->id, ":pass" => $this->password ) );
             return $UpPass;
         }
+        public function updateProfile(){
+            $sqlUpdatePro = "UPDATE `usuarios` SET `nombre` = :nom, `apellido` = :ape, `telefono` = :tel, `email` = :email  WHERE `usuarios`.`id` = :id";
+            $updatePro = $this->conexion->prepare( $sqlUpdatePro );
 
-
+            $updatePro->execute( array( ":nom" => $this->nombre, ":ape" => $this->apellido, ":tel" => $this->telefono, ":email" => $this->email, ":id" => $this->id ) );
+            return $updatePro;
+        }
+        public function getAllSolicitudes() {
+            $sqlSolicitudes = 'SELECT * FROM usuarios WHERE fk_rol = 3 AND estado_vip = 3';
+            $solicitudes = $this->conexion->prepare( $sqlSolicitudes );
+            $solicitudes->execute();
+            return $solicitudes;
+        }
+        public function updateEstadoSolicitud() {
+            $sqlUpdate = "UPDATE usuarios SET estado_vip = :estado_vip, tarjeta = :tarjeta, fk_rol = :fk_rol WHERE id = :id";
+            $update = $this->conexion->prepare( $sqlUpdate );
+            $update->execute( array( ":estado_vip" => $this->estado_vip, ":tarjeta" => $this->tarjeta, ":fk_rol" => $this->fk_rol, ":id" => $this->id ) );
+            return $update;
+        }
     }

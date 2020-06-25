@@ -21,7 +21,7 @@
                 <div class="col-6 col-md-4 col-xl-4 col-lg-4 mb-4">
                 <form action="<?= URL_BASE ?>inicio/detalle" method="post">
                         <input type="hidden" name="id" value="<?= $movie['id'] ?>">
-                        <button type="submit" class="btn btn-block cards-movies-cartelera"> <img src="<?= $movie['imagen'] ?>" class="w-100 height-card-movie" loading="lazy"> </button>
+                        <button type="submit" class="btn btn-block cards-movies-cartelera"> <img src="<?= $movie['imagen'] ?>" alt="<?= $movie['nombre'] ?>" title="<?= $movie['nombre'] ?>" class="w-100 height-card-movie" loading="lazy"> </button>
                     </form>
                 </div>
             <?php endforeach ?>
@@ -36,7 +36,7 @@
                 <div class="col-6 col-md-4 col-xl-4 col-lg-4 mb-4">
                     <form action="<?= URL_BASE ?>inicio/detalle" method="post">
                         <input type="hidden" name="id" value="<?= $movie['id'] ?>">
-                        <button type="submit" class="btn btn-block cards-movies-extreno"> <img src="<?= $movie['imagen'] ?>" class="w-100 height-card-movie"> </button>
+                        <button type="submit" class="btn btn-block cards-movies-extreno"> <img src="<?= $movie['imagen'] ?>" alt="<?= $movie['nombre'] ?>" title="<?= $movie['nombre'] ?>" class="w-100 height-card-movie"> </button>
                     </form>
                 </div>
             <?php endforeach ?>

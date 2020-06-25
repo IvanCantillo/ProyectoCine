@@ -23,10 +23,22 @@ form_login.addEventListener('submit', async (e) => {
     if ( res.error === false) {
         window.location = URL_BASE + 'inicio/'
     }else {
-        email_error.innerText = 'El correo es incorrecto';
-        setTimeout(() => {
-            email_error.innerText = '';
-        }, 3000);
+        if( res.message == 'password-error' ){
+            password_error.innerText = 'La contraseña es incorrecta';
+            setTimeout(() => {
+                password_error.innerText = '';
+            }, 3000);
+        }else if( res.message == 'user-bloqueado' ){
+            email_error.innerText = 'Haz sido bloqueado por incumplimiento de normas';
+            setTimeout(() => {
+                email_error.innerText = '';
+            }, 3000);
+        }else {
+            email_error.innerText = 'El correo es incorrecto';
+            setTimeout(() => {
+                email_error.innerText = '';
+            }, 3000);
+        }
     }
 })
 

@@ -73,7 +73,7 @@
         // ----------------------------------------------------
 
         public function AllMovies() {
-            $sqlMovies = 'SELECT * FROM peliculas';
+            $sqlMovies = 'SELECT * FROM peliculas WHERE fk_estado = 1';
             $movies = $this->conexion->prepare( $sqlMovies );
             $movies->execute();
             return $movies;
@@ -94,14 +94,14 @@
         }
 
         public function getMostPopularMovie() {
-            $sqlMostPopular = "SELECT * FROM peliculas LIMIT 6";
+            $sqlMostPopular = "SELECT * FROM peliculas WHERE fk_estado = 1 ORDER BY fk_sala DESC LIMIT 6";
             $mostPopular = $this->conexion->prepare( $sqlMostPopular );
             $mostPopular->execute();
             return $mostPopular;
         }
 
         public function getMoviesCartelera() {
-            $sqlCartelera = "SELECT * FROM peliculas WHERE fk_sala > 0";
+            $sqlCartelera = "SELECT * FROM peliculas WHERE fk_sala > 0 AND fk_estado = 1";
             $cartelera = $this->conexion->prepare( $sqlCartelera );
             $cartelera->execute();
             return $cartelera;
@@ -132,6 +132,40 @@
             $sqlDelete = "DELETE FROM peliculas WHERE id = :id";
             $deleteMov = $this->conexion->prepare( $sqlDelete );
             $deleteMov->execute( array( ":id" => $this->id ) );
+        }
+
+        public function desasignarSala(){
+
+            for ($i=1; $i < 4; $i++) { 
+                $sqlDesasignar ="UPDATE `peliculas` SET `fk_sala`= null WHERE `fk_sala` = $i ";
+                $desasignar = $this->conexion->prepare( $sqlDesasignar );
+                $desasignar->execute();
+            }
+            
+        }
+
+        public function asinarSala($p1, $p2, $p3){
+
+            for ($i=1; $i < 4; $i++) { 
+                if($i == 1){
+                    $sqlAsignar ="UPDATE `peliculas` SET `fk_sala`= 1 WHERE `id` = $p1 ";
+                    $asignar = $this->conexion->prepare( $sqlAsignar );
+                    $asignar->execute();
+                }
+                if($i == 2){
+                    $sqlAsignar ="UPDATE `peliculas` SET `fk_sala`= 2 WHERE `id` = $p2 ";
+                    $asignar = $this->conexion->prepare( $sqlAsignar );
+                    $asignar->execute();
+                }
+                if($i == 3){
+                    $sqlAsignar ="UPDATE `peliculas` SET `fk_sala`= 3 WHERE `id` = $p3 ";
+                    $asignar = $this->conexion->prepare( $sqlAsignar );
+                    $asignar->execute();
+                }
+            }
+
+            
+
         }
 
     }

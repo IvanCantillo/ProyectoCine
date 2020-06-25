@@ -32,7 +32,7 @@
                                 <td> <?= $user['rol'] ?> </td>
                                 <td> <?= ($user['fk_estado'] == 1) ? 'Activo' : 'Inactivo' ?> </td>
                                 <td class="text-center">
-                                    <form action="<?= URL_BASE ?>user/editar" method="POST">
+                                    <form action="<?= URL_BASE ?>admin/editar" method="POST">
                                         <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                         <button type="submit" class="btn btn-info"> <i class="fas fa-pen"></i> </button>
                                     </form>
