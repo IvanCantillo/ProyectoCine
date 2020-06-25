@@ -19,6 +19,6 @@ form_edit.addEventListener("submit", async e => {
   const data = new FormData(form_edit);
   const res = await edit( data );
   if (res.message == 'ok') {
-    window.location = URL_BASE + 'user/lista'
+    window.location = URL_BASE + 'Admin/listaUsuarios'
   }
 });

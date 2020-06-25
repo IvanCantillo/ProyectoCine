@@ -133,15 +133,12 @@
             if( isset( $_POST['tarjeta'] ) ){
                 $objTarjeta = new UserModel();
                 $objTarjeta->setTarjeta( $_POST['tarjeta'] );
+                $objTarjeta->setId( $_SESSION['usuario']['id'] );
                 $resTarjeta = $objTarjeta->tarjeta();
                 if( $resTarjeta == 'tarjeta-no-exist' ){
                     echo json_encode( 'error' );
                 }else{
-                    if( $_SESSION['usuario']['tarjeta'] == $resTarjeta ){
-                        echo json_encode( $resTarjeta );
-                    }else{
-                        echo json_encode( 'tarjeta-error' );
-                    }
+                    echo json_encode( $resTarjeta );
                 }
             }else{
                 header('Location:'. URL_BASE .'inicio/');

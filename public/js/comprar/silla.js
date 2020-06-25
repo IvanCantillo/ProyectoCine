@@ -20,7 +20,7 @@ const descuento = document.getElementById("descuento");
 const descuento_tarjeta = document.getElementById("descuento_tarjeta");
 var valor_total = 0;
 var vip = false;
-
+var id_pelicula = document.getElementById('id_pelicula').value;
 const valor_silla = 15000;
 const descuento_sillas = 3000;
 var descuento_tarjeta_vip = valor_silla * 0.45;
@@ -113,16 +113,9 @@ if (verificar_tarjeta != null) {
     var data = new FormData(form_verificar_tarjeta);
     var res = await getTarjeta(data);
     if (res != "error") {
-      if (res == "tarjeta-error") {
-        error_tarjeta.innerText = "La tarjeta no coincide con la registrada o no tienes tarjeta asigada.";
-        setInterval(() => {
-          error_tarjeta.innerText = "";
-        }, 3000);
-      } else {
         vip = true;
         btn_verificar.classList.add("d-none");
         tarjeta.setAttribute("readonly", "");
-      }
     } else {
       error_tarjeta.innerText = "La tarjeta no existe";
       setInterval(() => {
@@ -132,10 +125,17 @@ if (verificar_tarjeta != null) {
   });
 }
 
+// var form_comprar_ticket = document.getElementById('form_comprar_ticket');
+
+// form_comprar_ticket.addEventListener('submit', (e) => {
+//   e.preventDefault();
+
+// })
+
 btn_comprar.addEventListener("click", () => {
-  // window.open(URL_BASE + 'user/generador_pdf', '_blank');
   let modal = document.getElementById("modal");
   modal.innerHTML = `
+  <form method="POST" action="${ URL_BASE }comprar/comprar_ticket" id="form_comprar_ticket">
     <div class="modal modal-dialog modal-dialog-scrollable" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -148,8 +148,9 @@ btn_comprar.addEventListener("click", () => {
           <div class="modal-body">
             ¿Desea realizar la compra para la pelicula <b>${nombre_pelicula} </b>?
             <hr>
-            <form>
-              <div class="form-group">
+            <input name="id_pelicula" value="${ id_pelicula }" class="d-none" />
+            <input name="nombre_pelicula" value="${ nombre_pelicula }" class="d-none" />
+            <div class="form-group">
                 <label> Cantidad </label>
                 <input name="cantidad" class="form-control" readonly value="${contador_boletas}" />
               </div>
@@ -173,15 +174,15 @@ btn_comprar.addEventListener("click", () => {
                 <label> Total </label>
                 <input name="total" class="form-control" readonly value="${valor_total}" />
               </div>
-            </form>
+            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Aceptar</button>
+            <button type="submit" class="btn btn-primary">Aceptar</button>
           </div>
         </div>
       </div>
     </div>
-  `;
+  </form>`;
   return modal;
 });

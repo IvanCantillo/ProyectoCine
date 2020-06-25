@@ -104,19 +104,12 @@ class VentasModel{
         $ventas->execute( array( ":fk_usuario" => $this->fk_usuario ) );
         return $ventas;
     }
+    
+    public function comprar(){
+      $sqlComprar = "INSERT INTO ventas(fk_usuario, fk_pelicula, cantidad, descuento_silla, descuento_tarjeta, precio, fecha_creacion, total) VALUES (:fk_usuario, :fk_pelicula, :cantidad, :descuento_silla, :descuento_tarje, :precio, :fecha_cre, :total)";
+      $comprar = $this->conexion->prepare( $sqlComprar );
+      $comprar->execute(array(':fk_usuario' => $this->fk_usuario, ':fk_pelicula' => $this->fk_pelicula, ':cantidad' => $this->cantidad, ':descuento_silla' => $this->descuento_silla, ':descuento_tarje' => $this->descuento_tarjeta, ':precio' => $this->precio, ':fecha_cre' => $this->fecha_creacion, ':total' => $this->total ) );
+      return $comprar;
+  }
 
-    // public function getVentasByMovie() {
-    //     $sqlVenta = 'SELECT ventas.*, usuarios.nombre AS nombre_usuario, peliculas.nombre AS nombre_pelicula FROM ventas INNER JOIN usuarios ON ventas.fk_usuario = usuarios.id INNER JOIN peliculas ON ventas.fk_pelicula = peliculas.id WHERE ventas.fk_pelicula = :fk_pelicula';
-    //     $ventas = $this->conexion->prepare( $sqlVenta );
-    //     $ventas->execute( array( ":fk_pelicula" => $this->fk_pelicula ) );
-    //     return $ventas;
-    // }
-
-    // public function getVentasByFecha() {
-    //     $sqlVenta = 'SELECT ventas.*, usuarios.nombre AS nombre_usuario, peliculas.nombre AS nombre_pelicula FROM ventas INNER JOIN usuarios ON ventas.fk_usuario = usuarios.id INNER JOIN peliculas ON ventas.fk_pelicula = peliculas.id WHERE fecha_creacion = :fecha_creacion';
-    //     $ventas = $this->conexion->prepare( $sqlVenta );
-    //     $ventas->execute( array( ":fecha_creacion" => $this->fecha_creacion ) );
-    //     return $ventas;
-    // }
-
-}
+} 

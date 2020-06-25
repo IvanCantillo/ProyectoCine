@@ -14,7 +14,7 @@
     <div class="container-fluid container-top mb-4">
         <div class="row">
             <div class="col-11 mx-auto" id="lista_sillas">
-
+                <input type="hidden" id="id_pelicula" value="<?= $resMovie['id'] ?>">
                 <h3 class="text-center mt-3 mb-4"> Comprar tickets para la pelicula <b><?= $resMovie['nombre'] ?></b> </h3>
                 <section class="row justify-content-center">
                     <div class="col mx-auto mb-4 text-center">
@@ -114,7 +114,7 @@
                     <a href="#" id="verificar_tarjeta"> Verificar tarjeta <i class="fas fa-angle-down"></i></a>
                     <form id="form_verificar_tarjeta">
                         <div class="input-group d-none" id="div_verificar"> 
-                            <input class="form-control" type="text" id="tarjeta" name="tarjeta" placeholder="Numero de tarjeta" value="<?= $_SESSION['usuario']['tarjeta']  ?>">
+                            <input class="form-control" type="text" id="tarjeta" name="tarjeta" placeholder="Numero de tarjeta" value="">
                             <div class="input-group-append">
                                 <button class="input-group-text bg-header text-white" id="btn_verificar" type="submit"> <i class="fas fa-check"></i> </button>
                             </div>

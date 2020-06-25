@@ -142,9 +142,9 @@
             return $tarjetas;
         }
         public function tarjeta() {
-            $sqlTarjeta = "SELECT tarjeta FROM usuarios WHERE tarjeta = :tarjeta";
+            $sqlTarjeta = "SELECT tarjeta FROM usuarios WHERE tarjeta = :tarjeta AND id = :id";
             $tarjeta = $this->conexion->prepare( $sqlTarjeta );
-            $tarjeta->execute( array( ":tarjeta" => $this->tarjeta ) );
+            $tarjeta->execute( array( ":tarjeta" => $this->tarjeta, ":id" => $this->id ) );
             if( $tarjeta->rowCount() > 0 ){
                 return $tarjeta->fetch( PDO::FETCH_ASSOC );
             }else {

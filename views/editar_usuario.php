@@ -47,7 +47,6 @@
                                 <select class="form-control" name="rol" id="rol">
                                     <option value="<?= $resUser['fk_rol'] ?>"> <?= $resUser['rol'] ?> </option>
                                     <option value="3"> User </option>
-                                    <option value="2"> Vip </option>
                                     <option value="1"> Admin </option>
                                 </select>
                             </div>
